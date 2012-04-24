@@ -44,6 +44,8 @@ function scene:keypressed(key, unicode)
 end
 
 function scene:copySpritesheetResources()
+  print(love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.png')
+  
   local source = io.open(app.workspaceDirectory..'spritesheet.png', 'rb')
   local dest = io.open(love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.png', 'wb')
   local data = source:read('*all')

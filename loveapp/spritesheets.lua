@@ -28,7 +28,7 @@ function Spritesheet:load(path, name)
   
   self.quads = {}
   
-  local frameData = require(path..name..'.lua')
+  local frameData = require(path..name)
   local frames = frameData.getFrames()
   
   for name, frame in pairs(frames) do
