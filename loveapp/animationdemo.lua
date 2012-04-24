@@ -20,6 +20,9 @@ function AnimationDemo:initialize(name, animation, spritesheet)
   self.currentFrameIndex = 1
   self.spritesheet = spritesheet
   self.elapsed = 0
+  self.scale = 2
+  
+  self.drawOutline = true
   
   self.valid = true
   
@@ -69,12 +72,28 @@ function AnimationDemo:draw()
                          math.floor(self.position.x) + self.offset.x, 
                          math.floor(self.position.y) + self.offset.y,
                          0,
-                         2,
-                         2)
+                         self.scale,
+                         self.scale)
   colors.black:set()
-  
+
+
+  if self.drawOutline then
+    colors.red:set()
+    
+    local x, y, w, h = self.spritesheet.quads[currentFrame.name]:getViewport()
+    love.graphics.setLineWidth(1)
+    love.graphics.rectangle('line', 
+                            math.floor(self.position.x) + self.offset.x, 
+                            math.floor(self.position.y) + self.offset.y, 
+                            w * self.scale, 
+                            h * self.scale)
+  end
+
+  -- Draw animation and frame names
+  colors.black:set()
   local width = fonts.default:getWidth(self.name)
   
   love.graphics.print(self.name, self.position.x - width / 4, self.position.y + 45, 0, 1, 1)
   love.graphics.print(currentFrame.name, self.position.x - width / 4, self.position.y + 65, 0, 1, 1)
+  
 end

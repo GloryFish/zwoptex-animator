@@ -72,12 +72,14 @@ function scene:reloadAnimations()
 
   if f ~= nil then
     self.animations = f()
+    self.demos = {}
   else
     print('Error:'..message)
   end
+
   
-  local offset = vector(100, 100)
-  local width = 4
+  local offset = vector(100, 140)
+  local width = 5 -- Number of demos per row
   local padding = 200
   local index = 0
 
@@ -116,6 +118,21 @@ function scene:update(dt)
 end
 
 function scene:draw()
+  colors.black:set()
+
+  love.graphics.print(app.workspaceDirectory..'spritesheet.lua', 20, 10)
+  love.graphics.print(app.workspaceDirectory..'spritesheet.png', 20, 25)
+  love.graphics.print(app.workspaceDirectory..'animations.lua', 20, 40)
+
+  local play = 'play'
+  if self.paused then
+    play = 'paused'
+  end
+  love.graphics.print(play, 20, 60)
+
+  colors.black:set()
+  love.graphics.line(40, 100, love.graphics.getWidth() - 40, 100)
+  
   self.spritesheet.batch:clear()
   
   for i, demo in ipairs(self.demos) do
@@ -127,6 +144,7 @@ function scene:draw()
 end
 
 function scene:quit()
+  love.event.push('q')
 end
 
 function scene:leave()
