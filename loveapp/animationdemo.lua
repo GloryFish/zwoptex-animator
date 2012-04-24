@@ -32,6 +32,20 @@ function AnimationDemo:initialize(name, animation, spritesheet)
   
 end
 
+function AnimationDemo:back()
+  self.currentFrameIndex = self.currentFrameIndex - 1
+  if self.currentFrameIndex < 1 then -- Aaaand back around
+    self.currentFrameIndex = #self.frames
+  end
+end
+
+function AnimationDemo:forward()
+  self.currentFrameIndex = self.currentFrameIndex + 1
+  if self.currentFrameIndex > #self.frames then -- Aaaand back around
+    self.currentFrameIndex = 1
+  end
+end
+
 function AnimationDemo:update(dt)
   self.elapsed = self.elapsed + dt
   

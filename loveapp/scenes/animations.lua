@@ -27,6 +27,20 @@ function scene:keypressed(key, unicode)
   if key == ' ' then
     self.paused = not self.paused
   end
+
+  if key == 'left' then
+    for i, demo in ipairs(self.demos) do
+      demo:back()
+    end
+    
+  end
+
+  if key == 'right' then
+    for i, demo in ipairs(self.demos) do
+      demo:forward()
+    end
+  end
+
 end
 
 function scene:copySpritesheetResources()
