@@ -62,4 +62,5 @@ function AnimationDemo:draw()
   local width = fonts.default:getWidth(self.name)
   
   love.graphics.print(self.name, self.position.x - width / 4, self.position.y + 45, 0, 1, 1)
+  love.graphics.print(currentFrame.name, self.position.x - width / 4, self.position.y + 65, 0, 1, 1)
 end

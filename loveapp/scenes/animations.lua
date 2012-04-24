@@ -12,6 +12,7 @@ local scene = scenes.animations
 function scene:enter(pre)
   self.demos = {}
   self:reloadAnimations()
+  self.paused = false
 end
 
 function scene:keypressed(key, unicode)
@@ -21,6 +22,10 @@ function scene:keypressed(key, unicode)
   
   if key == 'r' then
     self:reloadAnimations()
+  end
+  
+  if key == ' ' then
+    self.paused = not self.paused
   end
 end
 
@@ -84,6 +89,10 @@ function scene:mousereleased(x, y, button)
 end
 
 function scene:update(dt)
+  if self.paused then
+    dt = 0
+  end
+  
   if love.mouse.isDown('l') then
   end
 
