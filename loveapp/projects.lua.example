@@ -1,0 +1,18 @@
+--
+--  projects.lua.example
+--  zwoptex-animator
+--
+--  Copy this file to projects.lua and edit with your configuration info.
+--
+--  Created by Jay Roberts on 2012-05-01.
+--  Copyright 2012 GloryFish.org. All rights reserved.
+--
+
+local projects = {
+  {
+    name = 'PrintableProjectName',
+    folder = '/absolute/path/to/sprite/files/with/trailing/slash/'
+  },
+}
+
+return projects

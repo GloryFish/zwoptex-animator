@@ -13,9 +13,7 @@ require 'vector'
 require 'colors'
 require 'rectangle'
 
-scenes.base = Gamestate.new()
-
-local scene = scenes.base
+local scene = Gamestate.new()
 
 function scene:enter(pre)
 
@@ -46,3 +44,5 @@ end
 
 function scene:leave()
 end
+
+return scene

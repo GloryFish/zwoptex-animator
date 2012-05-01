@@ -12,15 +12,13 @@ require 'middleclass-extras'
 require 'gamestate'
 require 'input'
 require 'logger'
-require 'utility'
 require 'spritesheets'
 
-scenes = {}
-require 'scenes/animations'
-require 'scenes/error'
+scenes = require 'scenes'
+projects = require 'projects'
 
 app = {}
-app.workspaceDirectory = '/Users/gloryfish/git/rogue-descent/loveapp/resources/sprites/'
+app.currentProject = nil
 
 function love.load()
   isDebug = true
@@ -29,11 +27,6 @@ function love.load()
   love.filesystem.setIdentity('zwoptex-animator')
 
   love.graphics.setBackgroundColor(255, 255, 255)
-
-  -- Seed random
-  local seed = os.time()
-  math.randomseed(seed);
-  math.random(); math.random(); math.random()
 
   fonts = {
     default        = love.graphics.newFont('resources/fonts/silkscreen.ttf', 20),
@@ -47,22 +40,7 @@ function love.load()
 
   Gamestate.registerEvents()
 
-  if not file_exists(app.workspaceDirectory..'spritesheet.png') or 
-     not file_exists(app.workspaceDirectory..'spritesheet.lua') then
-    scenes.error.message = "Place files in the workspace folder."
-    Gamestate.switch(scenes.error)
-  else
-    if not file_exists(app.workspaceDirectory..'animations.lua') then
-      local templateData = love.filesystem.read('resources/templates/animations.lua')
-      local templateFile = io.open(app.workspaceDirectory..'animations.lua', 'w')
-      templateFile:write(templateData)
-      templateFile:close()
-    end
-    
-    Gamestate.switch(scenes.animations)
-  end
-  
-  
+  Gamestate.switch(scenes.projects)
 end
 
 function love.update(dt)
