@@ -47,14 +47,42 @@ function scene:copySpritesheetResources()
   print(love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.png')
   
   local source = io.open(app.workspaceDirectory..'spritesheet.png', 'rb')
+  
+  if source == nil then
+    scenes.error.message = 'Couldn\'t load source: '..app.workspaceDirectory..'spritesheet.png'
+    Gamestate.switch(scenes.error)
+    return
+  end
+  
   local dest = io.open(love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.png', 'wb')
+
+  if dest == nil then
+    scenes.error.message = 'Couldn\'t load dest: '..love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.png'
+    Gamestate.switch(scenes.error)
+    return
+  end
+  
   local data = source:read('*all')
   dest:write(data)
   dest:close()
   source:close()
 
   source = io.open(app.workspaceDirectory..'spritesheet.lua', 'r')
+
+  if source == nil then
+    scenes.error.message = 'Couldn\'t load source: '..app.workspaceDirectory..'spritesheet.lua'
+    Gamestate.switch(scenes.error)
+    return
+  end
+
   dest = io.open(love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.lua', 'w')
+  
+  if dest == nil then
+    scenes.error.message = 'Couldn\'t load dest: '..love.filesystem.getWorkingDirectory()..'/loveapp/cache/spritesheet.lua'
+    Gamestate.switch(scenes.error)
+    return
+  end
+  
   data = source:read('*all')
   dest:write(data)
   dest:close()
