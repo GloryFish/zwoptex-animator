@@ -23,7 +23,6 @@ function Spritesheet:hasSpriteNamed(spritename)
 end
 
 function Spritesheet:load(path, name)
-	print(path..name..'.png')
   self.texture = love.graphics.newImage(path..name..'.png') 
   self.texture:setFilter('nearest', 'nearest')
   
